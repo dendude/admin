@@ -1,0 +1,29 @@
+{
+  "name": "camp",
+  "authors": [
+    "Denis Kravtsov <denis.kravtsov.1986@mail.ru>"
+  ],
+  "description": "",
+  "main": "bower.json",
+  "moduleType": [],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "vendor/bower",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "AdminLTE": "admin-lte#~2.3.5"
+  },
+  "dependencies": {
+    "jquery": "^2.2.4",
+    "dropzone": "~4.3.0",
+    "font-awesome": "^4.6.3",
+    "colorbox": "~1.6.4",
+    "jquery-colorbox": "colorbox#^1.6.4"
+  }
+}
