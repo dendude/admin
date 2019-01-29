@@ -23,7 +23,7 @@ $inputMiddle = ['inputOptions' => ['class' => 'form-control input-middle']];
         <div class="box-header with-border"><?= Yii::$app->params['required_fields'] ?></div>
         <div class="box-body">
             <?= $form->field($model, 'parent_id')->dropDownList(\app\models\Menu::getFilterList(), [
-                'encode' => false, 'prompt' => '--', 'class' => 'form-control select2'
+                'encode' => false, 'prompt' => '--', 'class' => 'form-control'
             ]) ?>
             <div class="separator"></div>
             <?= $form->field($model, 'name') ?>
@@ -31,15 +31,15 @@ $inputMiddle = ['inputOptions' => ['class' => 'form-control input-middle']];
             <div class="separator"></div>
             <?= $form->field($model, 'page_id')->dropDownList(\app\models\Pages::getFilterList(), [
                 'prompt' => '',
-                'class' => 'form-control select2',
+                'class' => 'form-control',
             ]) ?>
             <div class="form-group">
                 <div class="col-xs-12 col-md-4"></div>
                 <div class="col-xs-12 col-md-7">Или</div>
             </div>
-            <?= $form->field($model, 'gallery_id')->dropDownList(\app\models\Gallery::getFilterList(), [
+            <?= $form->field($model, 'gallery_id')->dropDownList(\app\models\Gallery::getFilterList(0,0,'- ',3), [
                 'prompt' => '',
-                'class' => 'form-control select2',
+                'class' => 'form-control',
                 'encode' => false,
             ]) ?>
             <div class="separator"></div>
@@ -57,14 +57,16 @@ $inputMiddle = ['inputOptions' => ['class' => 'form-control input-middle']];
 <?php ActiveForm::end() ?>
 
 <?php
-$this->registerJs("
-var \$page = $('#" . Html::getInputId($model, 'page_id') . "');
-var \$gallery = $('#" . Html::getInputId($model, 'gallery_id') . "');
 
-\$page.on('change', function(){
-    \$gallery.val(0).select2();
+$this->registerJs("
+var \$page_input = $('#" . Html::getInputId($model, 'page_id') . "');
+var \$gallery_input = $('#" . Html::getInputId($model, 'gallery_id') . "');
+
+\$page_input.on('change', function(){
+    \$gallery_input.val(0);
 });
-\$gallery.on('change', function(){
-    \$page.val(0).select2();
+
+\$gallery_input.on('change', function(){
+    \$page_input.val(0);
 });
 ");

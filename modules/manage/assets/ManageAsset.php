@@ -19,8 +19,8 @@ class ManageAsset extends AssetBundle
         '/lib/jquery-colorbox/jquery.colorbox.js',
         '/lib/jquery-colorbox/i18n/jquery.colorbox-ru.js',
         
-        'js/site.js?2',
-        'js/manage.js?2',
+        'js/site.js?3',
+        'js/manage.js?3',
     ];
 
     public $depends = [

@@ -43,24 +43,25 @@ $(document).ready(function(){
 });
 
 function set_select2(obj) {
-    var $sel = $(obj || '.select2');
 
+    var $sel = $(obj || '.select2');
     $sel.css('width', '100%');
-    var $select2 = $sel.filter(':visible').select2({
+
+    $sel.filter(':visible').select2({
         selectOnClose: true
     });
 
-    $select2.on('select2:select', function (e) {
-        var data = e.params.data;
-
-        $('option', $sel).removeAttr('selected');
-        $('option', $sel).prop('selected', false);
-
-        $('option[value=' + data.id + ']', $sel).attr('selected', 'selected');
-        $('option[value=' + data.id + ']', $sel).prop('selected', true);
-
-        $sel.val(data.id);
-    });
+    // $select2.on('select2:select', function (e) {
+    //     var data = e.params.data;
+    //
+    //     $('option', $sel).removeAttr('selected');
+    //     $('option', $sel).prop('selected', false);
+    //
+    //     $('option[value=' + data.id + ']', $sel).attr('selected', 'selected');
+    //     $('option[value=' + data.id + ']', $sel).prop('selected', true);
+    //
+    //     $sel.val(data.id);
+    // });
 }
 
 function set_field(type, field, url, obj) {

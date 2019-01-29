@@ -91,7 +91,9 @@ class Pages extends ActiveRecord
     public function beforeValidate()
     {
         $this->beforeValidateTrait();
+        
         $this->modified = time();
+        $this->alias = trim($this->alias, '/');
         
         if (is_array($this->breads_top_arr) && count($this->breads_top_arr)) {
             $this->breads_top = Json::encode($this->breads_top_arr);
