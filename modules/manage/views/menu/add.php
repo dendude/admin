@@ -63,10 +63,10 @@ var \$page_input = $('#" . Html::getInputId($model, 'page_id') . "');
 var \$gallery_input = $('#" . Html::getInputId($model, 'gallery_id') . "');
 
 \$page_input.on('change', function(){
-    \$gallery_input.val(0);
+    \$gallery_input.val('');
 });
 
 \$gallery_input.on('change', function(){
-    \$page_input.val(0);
+    \$page_input.val('');
 });
 ");

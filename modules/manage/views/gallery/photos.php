@@ -32,7 +32,7 @@ $form = ActiveForm::begin();
                             <div class="col-xs-12 col-md-4">
                                 <a href="<?= UploadForm::getSrc($model->images_f[$ik], UploadForm::TYPE_GALLERY) ?>"
                                    class="gallery-item__photo" rel="gal" title="<?= Html::encode($model->images_t[$ik]) ?>">
-                                    <img src="<?= UploadForm::getSrc($model->images_f[$ik], UploadForm::TYPE_GALLERY, '_sm') ?>" alt=""/>
+                                    <img src="<?= UploadForm::getSrc($model->images_f[$ik], UploadForm::TYPE_GALLERY) ?>" alt=""/>
                                 </a>
                             </div>
                             <div class="col-xs-12 col-md-6">

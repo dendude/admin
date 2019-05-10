@@ -89,7 +89,8 @@ class Menu extends ActiveRecord
         }
         
         // выбрана галерея - убираем страницу
-        if ($this->gallery_id) $this->page_id = 0;
+        if (!empty($this->page_id)) $this->gallery_id = 0;
+        if (!empty($this->gallery_id)) $this->page_id = 0;
 
         return parent::beforeSave($insert);
     }

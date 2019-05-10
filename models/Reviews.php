@@ -48,11 +48,11 @@ class Reviews extends ActiveRecord
     public static function getImagesIcons()
     {
         return [
-            'review-grandfather.png',
-            'review-grandmother.png',
-            'review-family-grandfather.png',
-            'review-family-grandmother.png',
-            'review-family.png',
+            'Grandfаther.svg',
+            'Grandmother.svg',
+            'Family-grandfather.svg',
+            'Family-grandmother.svg',
+            'Family.svg',
         ];
     }
 
