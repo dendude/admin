@@ -141,7 +141,6 @@ $project = Projects::getCurrentModel();
                 'field' => 'content',
                 'imageUploadUrl' => Url::to(['upload-image']),
                 'filesUploadUrl' => Url::to(['upload-files']),
-//                'filesManagerUrl' => Url::to(['files-manager']),
             ]); ?>
 
             <div class="row m-t-30">
@@ -171,7 +170,7 @@ $('textarea').on('keyup', function(){
 set_crumb_top();
 set_crumb_bottom();
 
-var last_bread_top = " . count($model->breads_top_arr) . ";
+var last_bread_top = " . count($model->breads_top_arr ?? []) . ";
 $(document).on('click', '#breads_top .btn-add', function(){
     last_bread_top++;
         
@@ -185,7 +184,7 @@ $(document).on('click', '#breads_top .btn-del', function(){
     set_crumb_top();
 });
 
-var last_bread_bottom = " . count($model->breads_bottom_arr) . ";
+var last_bread_bottom = " . count($model->breads_bottom_arr ?? []) . ";
 $(document).on('click', '#breads_bottom .btn-add', function(){
     last_bread_bottom++;
         

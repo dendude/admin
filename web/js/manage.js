@@ -50,18 +50,6 @@ function set_select2(obj) {
     $sel.filter(':visible').select2({
         selectOnClose: true
     });
-
-    // $select2.on('select2:select', function (e) {
-    //     var data = e.params.data;
-    //
-    //     $('option', $sel).removeAttr('selected');
-    //     $('option', $sel).prop('selected', false);
-    //
-    //     $('option[value=' + data.id + ']', $sel).attr('selected', 'selected');
-    //     $('option[value=' + data.id + ']', $sel).prop('selected', true);
-    //
-    //     $sel.val(data.id);
-    // });
 }
 
 function set_field(type, field, url, obj) {

@@ -40,17 +40,11 @@ class PagesController extends Controller
     public function actionAdd() {
         $model = new Pages();
 
-        $session = Yii::$app->session;
-
         if (Yii::$app->request->post('Pages')) {
             $model->load(Yii::$app->request->post());
             if ($model->save()) {
-                $session->offsetUnset(self::TEMP_NAME);
                 return $this->redirect(['list']);
             }
-        } elseif ($session->offsetExists(self::TEMP_NAME)) {
-            // из автосохранения
-            $model->content = $session->get(self::TEMP_NAME);
         }
         
         return $this->render('add', [
@@ -62,22 +56,15 @@ class PagesController extends Controller
         $model = Pages::findOne($id);
         if (!$model) $this->notFound();
 
-        $session = Yii::$app->session;
-
         if (Yii::$app->request->post('Pages')) {
             $model->load(Yii::$app->request->post());
             if ($model->save()) {
-                $session->offsetUnset(self::TEMP_NAME . $id);
-
                 if (Yii::$app->request->post('ref-page')) {
                     return $this->redirect(Yii::$app->request->post('ref-page'));
                 } else {
                     return $this->redirect(['list']);
                 }
             }
-        } elseif ($session->offsetExists(self::TEMP_NAME . $id)) {
-            // из автосохранения
-            $model->content = $session->get(self::TEMP_NAME . $id);
         }
         
         return $this->render('add', [
@@ -145,49 +132,5 @@ class PagesController extends Controller
         } else {
             echo Json::encode($upload_form->getErrors());
         }
-    }
-    
-//    public function actionFilesManager() {
-//        $result = [];
-//
-//        $common_path = 'img/pages-editor';
-//        $common_files = scandir(Yii::getAlias("@app/web/{$common_path}"));
-//
-//        if (count($common_files)) {
-//            foreach ($common_files AS $file_name) {
-//                if ($file_name == '.' || $file_name == '..') continue;
-//
-//                $result[] = [
-//                    'url' => "/{$common_path}/$file_name",
-//                    'thumb' => "/{$common_path}/$file_name",
-//                    'tag' => 'Рейтинг',
-//                ];
-//            }
-//        }
-//
-//        $pages_files = scandir(Yii::getAlias("@app/web/photos"));
-//
-//        if (count($pages_files)) {
-//            foreach ($pages_files AS $file_name) {
-//                // пропускаем корневый и фото не для страниц
-//                if ($file_name == '.' || $file_name == '..' || strpos($file_name, UploadForm::TYPE_PAGES . '_') !== 0) continue;
-//                // пропускаем миниатюры
-//                if (count(explode('_', $file_name)) > 2) continue;
-//
-//                $result[] = [
-//                    'url' => UploadForm::getSrc($file_name),
-//                    'thumb' => UploadForm::getSrc($file_name, '_sm'),
-//                    'tag' => 'Страницы',
-//                ];
-//            }
-//        }
-//
-//        Yii::$app->response->format = Response::FORMAT_JSON;
-//        return $result;
-//    }
-    
-    public function actionFilesManagerDelete() {
-        $src = Yii::$app->request->post('src');
-        if ($src) UploadForm::remove($src);
     }
 }

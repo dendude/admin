@@ -113,20 +113,6 @@ echo froala\froalaeditor\FroalaEditorWidget::widget([
         'videoDefaultAlign' => 'center',
         'videoDefaultDisplay' => 'block',
         
-//        'imageManagerPageSize' => 12,
-//        'imageManagerScrollOffset' => 10,
-//        'imageManagerLoadMethod' => 'POST',
-//        'imageManagerLoadURL' => $filesManagerUrl,
-//        'imageManagerLoadParams' => [
-//            Yii::$app->request->csrfParam => Yii::$app->request->csrfToken,
-//            'type' => 'images'
-//        ],
-//        'imageManagerDeleteMethod' => 'POST',
-//        'imageManagerDeleteParams' => [
-//            Yii::$app->request->csrfParam => Yii::$app->request->csrfToken,
-//        ],
-//        'imageManagerDeleteURL' => Url::to(['files-manager-delete']),
-        
         'imageOutputSize' => true,
         'imageMaxSize' => (10 * pow(1024, 2)),
         'imageMinWidth' => 32,
