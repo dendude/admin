@@ -94,15 +94,23 @@ class Pages extends ActiveRecord
         
         $this->modified = time();
         $this->alias = trim($this->alias, '/');
-        
-        if (is_array($this->breads_top_arr) && count($this->breads_top_arr)) {
-            $this->breads_top = Json::encode($this->breads_top_arr);
+
+        $breads_top_arr = array_filter($this->breads_top_arr, function($item){
+            return !empty($item['page_id']);
+        });
+
+        $breads_bottom_arr = array_filter($this->breads_bottom_arr, function($item){
+            return !empty($item['page_id']);
+        });
+
+        if (count($breads_top_arr) > 0) {
+            $this->breads_top = Json::encode($breads_top_arr);
         } else {
             $this->breads_top = '';
         }
     
-        if (is_array($this->breads_bottom_arr) && count($this->breads_bottom_arr)) {
-            $this->breads_bottom = Json::encode($this->breads_bottom_arr);
+        if (count($breads_bottom_arr) > 0) {
+            $this->breads_bottom = Json::encode($breads_bottom_arr);
         } else {
             $this->breads_bottom = '';
         }
