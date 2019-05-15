@@ -12,15 +12,15 @@ class ManageAsset extends AssetBundle
     public $css = [
         '/lib/jquery-colorbox/example3/colorbox.css',
         
-        'css/base.css?2',
-        'css/manage.css?2',
+        'css/base.css?4',
+        'css/manage.css?4',
     ];
     public $js = [
         '/lib/jquery-colorbox/jquery.colorbox.js',
         '/lib/jquery-colorbox/i18n/jquery.colorbox-ru.js',
         
-        'js/site.js?3',
-        'js/manage.js?3',
+        'js/site.js?7',
+        'js/manage.js?7',
     ];
 
     public $depends = [

@@ -48,66 +48,33 @@ $project = Projects::getCurrentModel();
                     </label>
                 </div>
                 <div class="col-xs-12 col-md-8">
-                    <table class="crumb-items" id="breads_top">
-                        <tbody>
-                            <? if (count($model->breads_top_arr)): ?>
-                                <? foreach ($model->breads_top_arr AS $index => $row): ?>
-                                    <?= $this->render('_crumb_item_top', ['model' => $model, 'index' => $index]) ?>
-                                <? endforeach; ?>
-                            <? else: ?>
-                                <?= $this->render('_crumb_item_top', ['model' => $model, 'index' => 0]) ?>
-                            <? endif; ?>
-                        </tbody>
-                    </table>
+                    <div id="breads_top">
+                        <? for ($i = 0; $i < 5; $i++): ?>
+                            <?= $this->render('_crumb_item_top', ['model' => $model, 'index' => $i]) ?>
+                        <? endfor; ?>
+                    </div>
                 </div>
             </div>
             
             <?= $form->field($model, 'bread_name')->textInput([
                 'placeholder' => 'Текст хлебной крошки для текущей страницы'
             ])->label('') ?>
-    
-            <div class="row m-b-40">
-                <div class="col-xs-12 col-md-offset-4 col-md-8">
-                    <div class="m-b-5">Итоговый вид хлебных крошек навигации</div>
-                    <ol id="bread_top_result" class="breadcrumb m-none">
-                        <li class="home-crumb">
-                            <a href="<?= $project->site_url ?>" target="_blank">
-                                <i class="fa fa-home"></i>&nbsp;&nbsp;Главная
-                            </a>
-                        </li>
-                        <li class="current-crumb active hidden"></li>
-                    </ol>
-                </div>
-            </div>
-            
-            <div class="form-group p-b-5">
+
+            <div class="form-group p-t-10 p-b-5">
                 <div class="col-xs-12 col-md-4 text-right">
                     <label class="control-label">
                         <?= $model->getAttributeLabel('breads_bottom') ?>
                     </label>
                 </div>
                 <div class="col-xs-12 col-md-8">
-                    <table class="crumb-items" id="breads_bottom">
-                        <tbody>
-                        <? if (count($model->breads_bottom_arr)): ?>
-                            <? foreach ($model->breads_bottom_arr AS $index => $row): ?>
-                                <?= $this->render('_crumb_item_bottom', ['model' => $model, 'index' => $index]) ?>
-                            <? endforeach; ?>
-                        <? else: ?>
-                            <?= $this->render('_crumb_item_bottom', ['model' => $model, 'index' => 0]) ?>
-                        <? endif; ?>
-                        </tbody>
-                    </table>
+                    <div id="breads_bottom">
+                        <? for ($i = 0; $i < 5; $i++): ?>
+                            <?= $this->render('_crumb_item_bottom', ['model' => $model, 'index' => $i]) ?>
+                        <? endfor; ?>
+                    </div>
                 </div>
             </div>
-    
-            <div class="row m-b-40">
-                <div class="col-xs-12 col-md-offset-4 col-md-8">
-                    <div class="m-b-5">Итоговый вид дополнительных хлебных крошек</div>
-                    <ol id="bread_bottom_result" class="breadcrumb m-none"></ol>
-                </div>
-            </div>
-                        
+
             <?= $form->field($model, 'meta_t')->textarea(['maxlength' => true]) ?>
             <?= $form->field($model, 'meta_d')->textarea(['maxlength' => true]) ?>
             <?= $form->field($model, 'meta_k')->textarea(['maxlength' => true]) ?>
@@ -153,59 +120,10 @@ $project = Projects::getCurrentModel();
 </div>
 <?php ActiveForm::end() ?>
 
-<table id="tmp_crumb_top" class="hidden">
-    <tbody><?= $this->render('_crumb_item_top', ['model' => $model, 'index' => '{index}']) ?></tbody>
-</table>
-<table id="tmp_crumb_bottom" class="hidden">
-    <tbody><?= $this->render('_crumb_item_bottom', ['model' => $model, 'index' => '{index}']) ?></tbody>
-</table>
-
 <?php
 // для показа кол-ва символов у редактируемой страницы
 $this->registerJs("
 $('textarea').on('keyup', function(){
     charsCalculate(this);
-}).keyup();
-
-set_crumb_top();
-set_crumb_bottom();
-
-var last_bread_top = " . count($model->breads_top_arr ?? []) . ";
-$(document).on('click', '#breads_top .btn-add', function(){
-    last_bread_top++;
-        
-    var content = $('#tmp_crumb_top tbody').html().replace(/{index}/g, last_bread_top);
-    $('#breads_top tbody').append(content);
-    
-    set_select2('#breads_top .select2:last');
-});
-$(document).on('click', '#breads_top .btn-del', function(){
-    $(this).closest('.crumb-rows').remove();
-    set_crumb_top();
-});
-
-var last_bread_bottom = " . count($model->breads_bottom_arr ?? []) . ";
-$(document).on('click', '#breads_bottom .btn-add', function(){
-    last_bread_bottom++;
-        
-    var content = $('#tmp_crumb_bottom tbody').html().replace(/{index}/g, last_bread_bottom);
-    $('#breads_bottom tbody').append(content);
-    
-    set_select2('#breads_bottom .select2:last');
-});
-$(document).on('click', '#breads_bottom .btn-del', function(){
-    $(this).closest('.crumb-rows').remove();
-    set_crumb_bottom();
-});
-
-$('#" . Html::getInputId($model, 'bread_name') . "').on('keyup', function(){
-    var \$last = $('#bread_top_result li:last');
-    \$last.text(this.value);
-    
-    if (this.value == '') {
-        \$last.addClass('hidden');        
-    } else {
-        \$last.removeClass('hidden');
-    }
 }).keyup();
 ");

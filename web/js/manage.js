@@ -45,11 +45,19 @@ $(document).ready(function(){
 function set_select2(obj) {
 
     var $sel = $(obj || '.select2');
-    $sel.css('width', '100%');
 
+    $sel.css('width', '100%');
     $sel.filter(':visible').select2({
         selectOnClose: true
     });
+
+    var $sel2 = $('.select2-page');
+    if ($sel2.length) {
+        $sel2.css('width', '100%');
+        $sel2.each(function(){
+            $(this).select2({selectOnClose: true});
+        });
+    }
 }
 
 function set_field(type, field, url, obj) {
@@ -85,82 +93,28 @@ function charsCalculate(obj) {
  * вставка хлебных крошек навигации
  */
 function set_crumb_top(select) {
-    var content = '';
-    var $row = $('#breads_top'),
-        $res = $('#bread_top_result');
 
-    $('.crumb-item', $res).remove();
-
-    if (select) {
-        var $s = $(select);
-        var $i = $s.closest('tr').find('input');
-        if ($s.val()) {
-            $i.val($('option:selected', $s).text());
-        } else {
-            $i.val('');
-        }
+    var $s = $(select);
+    var $i = $s.closest('.form-group').find('input');
+    if ($s.val()) {
+        $i.val($('option:selected', $s).text());
+    } else {
+        $i.val('');
     }
-
-    $('tr', $row).each(function(){
-        var urls, url;
-        var $i = $('input', this),
-            $s = $('select', this);
-
-        try {
-            urls = $s.data('urls');
-            url = urls[$s.val()] || '#';
-        } catch (e) {
-            console.log(e.message);
-            return;
-        }
-
-        if ($i.val() && $s.val()) {
-            content += $('<li class="crumb-item"><a href="' + url + '" target="_blank">' + $i.val() + '</a></li>').outerHTML();
-        }
-    });
-
-    $(content).insertAfter($('.home-crumb', $res));
 }
 
 /**
  * вставка дополнительных хлебных крошек
  */
 function set_crumb_bottom(select) {
-    var content = '';
-    var $row = $('#breads_bottom'),
-        $res = $('#bread_bottom_result');
 
-    $('li', $res).remove();
-
-    if (select) {
-        var $s = $(select);
-        var $i = $s.closest('tr').find('input');
-        if ($s.val()) {
-            $i.val($('option:selected', $s).text());
-        } else {
-            $i.val('');
-        }
+    var $s = $(select);
+    var $i = $s.closest('.form-group').find('input');
+    if ($s.val()) {
+        $i.val($('option:selected', $s).text());
+    } else {
+        $i.val('');
     }
-
-    $('tr', $row).each(function(){
-        var urls, url;
-        var $i = $('input', this),
-            $s = $('select', this);
-
-        try {
-            urls = $s.data('urls');
-            url = urls[$s.val()] || '#';
-        } catch (e) {
-            console.log(e.message);
-            return;
-        }
-
-        if ($i.val() && $s.val()) {
-            content += $('<li><a href="' + url + '" target="_blank">' + $i.val() + '</a></li>').outerHTML();
-        }
-    });
-
-    $res.html(content);
 }
 
 /**
