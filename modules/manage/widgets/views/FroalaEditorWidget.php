@@ -119,7 +119,7 @@ echo froala\froalaeditor\FroalaEditorWidget::widget([
         'imageMinHeight' => 32,
         'imageDefaultWidth' => 0,
         'imageMove' => true,
-        'imageAllowedTypes' => ['jpeg', 'jpg', 'png', 'gif'],
+        'imageAllowedTypes' => ['jpeg', 'jpg', 'png', 'gif', 'svg', 'webp'],
         'imageDefaultAlign' => 'left',
         'imageDefaultDisplay' => 'block',
         'imageUploadURL' => $imageUploadUrl,
